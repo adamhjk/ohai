@@ -23,7 +23,6 @@ $: << File.join(File.dirname(__FILE__), "..", "lib")
 require 'optparse'
 require 'rubygems'
 require 'ohai'
-require 'json'
 
 config = {
   :directory => nil,
