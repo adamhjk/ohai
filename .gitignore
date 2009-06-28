@@ -2,3 +2,4 @@ pkg/
 tmp/
 coverage/
 ohai.gemspec
+*.swp
