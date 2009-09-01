@@ -70,7 +70,7 @@ def metadata(id='')
     key = "#{id}#{o.gsub(/\=.*$/, '/')}"
     if key[-1..-1] != '/'
       ec2[key.gsub(/\-|\//, '_').to_sym] =
-        OpenURI.open_uri("#{EC2_METADATA_URL}/#{key}").gets
+        OpenURI.open_uri("#{EC2_METADATA_URL}/#{key}").gets(nil)
     else
       metadata(key)
     end
