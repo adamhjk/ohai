@@ -81,7 +81,7 @@ def userdata()
   ec2[:userdata] = nil
   # assumes the only expected error is the 404 if there's no user-data
   begin
-    ec2[:userdata] = OpenURI.open_uri("#{EC2_USERDATA_URL}/").gets
+    ec2[:userdata] = OpenURI.open_uri("#{EC2_USERDATA_URL}/").gets(nil)
   rescue OpenURI::HTTPError
   end
 end
