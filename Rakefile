@@ -5,7 +5,7 @@ require 'date'
 require 'spec/rake/spectask'
 
 GEM = "ohai"
-GEM_VERSION = "0.3.1"
+GEM_VERSION = "0.3.3"
 AUTHOR = "Adam Jacob"
 EMAIL = "adam@opscode.com"
 HOMEPAGE = "http://wiki.opscode.com/display/ohai"
@@ -24,6 +24,7 @@ spec = Gem::Specification.new do |s|
   
   s.add_dependency "json"
   s.add_dependency "extlib"
+  s.add_dependency "systemu"
   s.bindir = "bin"
   s.executables = %w(ohai)
   

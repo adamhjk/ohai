@@ -21,11 +21,8 @@ require 'extlib'
 require 'ohai/log'
 require 'ohai/mixin/from_file'
 require 'ohai/mixin/command'
-begin
-  require 'yajl/json_gem'
-rescue LoadError
-  require 'json'
-end
+require 'ohai/mixin/string'
+require 'json'
 
 module Ohai
   class System
