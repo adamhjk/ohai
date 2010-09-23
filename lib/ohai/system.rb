@@ -21,17 +21,7 @@ require 'ohai/log'
 require 'ohai/mixin/from_file'
 require 'ohai/mixin/command'
 require 'ohai/mixin/string'
-
-begin
-  require 'json'
-rescue LoadError
-  begin
-    require 'json/pure'
-  rescue LoadError
-    STDERR.puts "No valid JSON library detected, please install one of 'json' or 'json_pure'."
-    exit -2
-  end
-end
+require 'mixlib/json'
 
 module Ohai
   class System
@@ -45,6 +35,8 @@ module Ohai
       @seen_plugins = Hash.new
       @providers = Mash.new
       @plugin_path = ""
+      Mixlib::JSON.create_objects = true
+      Mixlib::JSON.select_json_library
     end
 
     def [](key)
@@ -219,16 +211,16 @@ module Ohai
 
     # Pretty Print this object as JSON
     def json_pretty_print
-      JSON.pretty_generate(@data)
+      Mixlib::JSON.pretty(@data)
     end
 
     def attributes_print(a)
       raise ArgumentError, "I cannot find an attribute named #{a}!" unless @data.has_key?(a)
       case a
       when Hash,Mash,Array
-        JSON.pretty_generate(@data[a])
+        Mixlib::JSON.pretty(@data[a])
       when String
-        JSON.pretty_generate(@data[a].to_a)
+        Mixlib::JSON.pretty(@data[a].to_a)
       else
         raise ArgumentError, "I can only generate JSON for Hashes, Mashes, Arrays and Strings. You fed me a #{@data[a].class}!"
       end
